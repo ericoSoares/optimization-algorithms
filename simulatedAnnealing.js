@@ -1,20 +1,20 @@
 const ITEMS = [
-    { name: 'item1', value: 878, weight: 20 },
-    { name: 'item2', value: 269, weight: 10 },
-    { name: 'item3', value: 20, weight: 4 },
-    { name: 'item4', value: 11, weight: 4 },
-    { name: 'item5', value: 375, weight: 15 },
-    { name: 'item6', value: 60, weight: 10 },
-    { name: 'item7', value: 50, weight: 7 },
-    { name: 'item8', value: 321, weight: 23 },
-    { name: 'item9', value: 80, weight: 5 },
-    { name: 'item10', value: 879, weight: 20 }
+    { name: 'item1',  weight: 95, value: 55 },
+    { name: 'item2',  weight: 4,  value: 10 },
+    { name: 'item3',  weight: 60, value: 47 },
+    { name: 'item4',  weight: 32, value: 5 },
+    { name: 'item5',  weight: 23, value: 4 },
+    { name: 'item6',  weight: 72, value: 50 },
+    { name: 'item7',  weight: 80, value: 8 },
+    { name: 'item8',  weight: 62, value: 61 },
+    { name: 'item9',  weight: 65, value: 85 },
+    { name: 'item10', weight: 46, value: 87 }
 ];
 const INITIAL_SOLUTION = ITEMS.map(r => '0').join('');
-const MAX_WEIGHT = 50;
+const MAX_WEIGHT = 269;
 const TEMP_MIN = 0;
 const COOLING_RATE = 0.01;
-const INITIAL_TEMP = 1000;
+const INITIAL_TEMP = 100000;
 
 function generateRandomNeighbour(solution) {
     let splitSol = solution.split('');
@@ -80,7 +80,16 @@ function simulatedAnnealing() {
 
 (function() {
     let solution = simulatedAnnealing();
+    let solutionArr = convertBitSolution(solution);
     console.log(solution);
-    console.log(convertBitSolution(solution));
+    console.log(solutionArr);
+    let finalWeight = solutionArr.reduce(function (a, b) {
+        return { weight: a.weight + b.weight }; // returns object with property x
+    });
+    console.log("Peso final: ", finalWeight.weight);
+    let finalValue = solutionArr.reduce(function (a, b) {
+        return { value: a.value + b.value }; // returns object with property x
+    });
+    console.log("Valor final: ", finalValue.value);
 
 })();
