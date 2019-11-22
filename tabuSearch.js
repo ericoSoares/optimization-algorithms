@@ -1,3 +1,4 @@
+// Constantes de entrada
 const ITEMS = [
     { name: 'item1',  weight: 95, value: 55 },
     { name: 'item2',  weight: 4,  value: 10 },
@@ -11,10 +12,11 @@ const ITEMS = [
     { name: 'item10', weight: 46, value: 87 }
 ];
 const INITIAL_SOLUTION = ITEMS.map(r => '0').join('');
-const MAX_ITER = 10000000;
-const MAX_TABU_SIZE = 10;
+const MAX_ITER = 1000000;
+const MAX_TABU_SIZE = 15;
 const MAX_WEIGHT = 269;
 
+// Gera lista com todos os vizinhos de uma solução
 function getNeighbors(solution) {
     let neighList = [];
 
@@ -27,6 +29,7 @@ function getNeighbors(solution) {
     return neighList;
 }
 
+// Converte de array de bits para array de itens
 function convertBitSolution(bits) {
     let returnList = [];
     let splitBits = bits.split('');
@@ -37,6 +40,7 @@ function convertBitSolution(bits) {
     return returnList;
 }
 
+// Fitness: calcula o valor total da solução e retorna ele ou -infinito caso ultrapasse o valor da mochila
 function fitness(solution) {
     let result = 0;
     let totalWeight = 0;
@@ -51,6 +55,7 @@ function fitness(solution) {
     return totalWeight > MAX_WEIGHT ? Number.NEGATIVE_INFINITY : result;
 }
 
+// Realize busca tabu
 function tabuSearch() {
     let bestSolution = INITIAL_SOLUTION;
     let bestCandidate = INITIAL_SOLUTION;
@@ -79,6 +84,7 @@ function tabuSearch() {
     return bestSolution;
 }
 
+// Main e printagem
 (function () {
     let solution = tabuSearch();
     let solutionArr = convertBitSolution(solution);

@@ -16,6 +16,7 @@ const TEMP_MIN = 0;
 const COOLING_RATE = 0.01;
 const INITIAL_TEMP = 100000;
 
+// Gera um vizinho aleatorio
 function generateRandomNeighbour(solution) {
     let splitSol = solution.split('');
     let randomIndex = Math.floor(Math.random() * (splitSol.length));
@@ -24,6 +25,7 @@ function generateRandomNeighbour(solution) {
     return splitSol.join('');
 }
 
+// Converte array de bits para array de itens
 function convertBitSolution(bits) {
     let returnList = [];
     let splitBits = bits.split('');
@@ -34,6 +36,7 @@ function convertBitSolution(bits) {
     return returnList;
 }
 
+// Retorna energia da solução
 function getEnergy(solution) {
     let result = 0;
     let totalWeight = 0;
@@ -47,6 +50,7 @@ function getEnergy(solution) {
     return totalWeight > MAX_WEIGHT ? Number.POSITIVE_INFINITY : result * -1;
 }
 
+// Executa simulated annealing
 function simulatedAnnealing() {
     let currentTemp = INITIAL_TEMP;
     let lastState = INITIAL_SOLUTION;
@@ -78,6 +82,7 @@ function simulatedAnnealing() {
     return bestState;
 }
 
+// Main e printagem
 (function() {
     let solution = simulatedAnnealing();
     let solutionArr = convertBitSolution(solution);
